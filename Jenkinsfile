@@ -42,6 +42,22 @@ pipeline {
         // Clean up
         sh "docker rmi -f ${docker_repo_uri}:${commit_id}"
     }
+		
+		
+		
+		
+	stage('Deploy') {
+    		steps {
+        	// Override image field in taskdef file
+        	sh "sed -i 's|{{image}}|${docker_repo_uri}:${commit_id}|' taskdef.json"
+        	// Create a new task definition revision
+        	sh "aws ecs register-task-definition --execution-role-arn ${exec_role_arn} --cli-input-json file://taskdef.json --region ${region}"
+        	// Update service on Fargate
+        	sh "aws ecs update-service --cluster ${cluster} --service sample-app-service --task-definition ${task_def_arn} --region ${region}"
+    		}
+	}
+	
+		
 
         }
     }
