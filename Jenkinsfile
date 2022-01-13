@@ -7,8 +7,8 @@ pipeline {
     // pipeline's stages.
     environment {
 	    region = "us-east-1"
-        docker_repo_uri = "407730735276.dkr.ecr.us-east-1.amazonaws.com/ci-session-2_dec27"
-		task_def_arn = "arn:aws:ecs:us-east-1:407730735276:task-definition/first-run-task-definition:6"
+        docker_repo_uri = "407730735276.dkr.ecr.us-east-1.amazonaws.com/ci-session-2_jan13"
+		task_def_arn = "arn:aws:ecs:us-east-1:407730735276:task-definition/first-run-task-definition:9"
         cluster = "CICD"
         exec_role_arn = "arn:aws:iam::407730735276:role/ecsTaskExecutionRole"
     }
@@ -20,7 +20,7 @@ pipeline {
         stage('Example') {
             steps {
                 // This is a step of type "echo". It doesn't do much, only prints some text.
-                echo 'This is a sample stage'
+                echo 'This is a sample stage, You did it again !!!'
                 // For a list of all the supported steps, take a look at
                 // https://jenkins.io/doc/pipeline/steps/ .
             }
